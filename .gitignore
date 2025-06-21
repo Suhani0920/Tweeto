@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+bin/
+include/
+lib/
+lib64/
+*.env
+.env
+
+# Django specific
+*.sqlite3
+media/
+static/
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# VS Code
+.vscode/ 
+
+# Operating System junk files
+.DS_Store
+Thumbs.db
