@@ -1,0 +1,44 @@
+{% extends "layout.html"%}
+
+{% block title %}
+    Tweets
+{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mt-4">welcome people</h2>
+<p>Welcome to Tweeto, the social media platform for sharing your thoughts in 280 characters or less.</p>
+
+<a class="btn btn-primary" href="{% url 'tweet_create' %}">Create a tweet</a>
+
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+        <div class="card" style="width: 18rem;">
+
+            {# --- START MODIFICATION FOR PHOTO --- #}
+            {% if tweet.photo %}
+                <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet photo by {{ tweet.user.username }}">
+            {% else %}
+               
+                <img src="https://via.placeholder.com/286x180?text=No+Image" class="card-img-top" alt="No image available">
+                
+            {% endif %}
+            {# --- END MODIFICATION FOR PHOTO --- #}
+
+            <div class="card-body">
+                <h5 class="card-title">{{ tweet.user.username }}</h5>
+
+               
+                <p class="card-text">{{ tweet.text }}</p>
+               
+                {% if request.user == tweet.user %}
+                    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %} {# This block runs if 'tweets' is empty #}
+        <p>No tweets found yet. Be the first to share your thoughts!</p>
+    {% endfor %}
+</div>
+{% endblock %}

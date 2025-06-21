@@ -21,5 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('tweet/', include('tweet.url')),
+    path('tweet/', include('tweet.url')),
+    path('/accounts/', include('django.contrib.auth.urls')),  # For login/logout
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
